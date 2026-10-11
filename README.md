@@ -1,1 +1,36 @@
-# data.jsonjson
+[data.json](https://github.com/user-attachments/files/33303230/data.json)
+[index.html](https://github.com/user-attachments/files/33303232/index.html)
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KFC梗图文案</title>
+<style>
+*{box-sizing: border-box;margin: 0;padding: 0;}
+body{margin:0;padding:30px;font-size:17px;background:#fff;color:#222;line-height:1.6;min-height:100vh;}
+#text-box{margin-bottom:40px;}
+#copy-btn{display:block;width:100%;padding:14px;border:none;border-radius:12px;background:#216ce7;color:#fff;font-size:18px;}
+</style>
+</head>
+<body>
+<div id="text-box">加载中...</div>
+<button id="copy-btn">点击复制</button>
+<script>
+let currentText = "";
+fetch("./data.json")
+.then(res=>res.json())
+.then(list=>{
+  currentText = list[Math.floor(Math.random() * list.length)]
+  document.getElementById('text-box').innerText = currentText
+})
+const btn = document.getElementById('copy-btn')
+btn.onclick = async ()=>{
+  if(!currentText) return;
+  await navigator.clipboard.writeText(currentText)
+  btn.innerText = "✅ 复制成功！"
+  setTimeout(()=>btn.innerText = "点击复制",1200)
+}
+</script>
+</body>
+</html>
